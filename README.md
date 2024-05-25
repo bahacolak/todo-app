@@ -1,70 +1,148 @@
-# Getting Started with Create React App
+# Todo Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a Todo application that allows users to manage their personal tasks. Users can add, edit, delete, and view their tasks. The project consists of a backend built with Node.js and Express, and a frontend built with React.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+1. [Features](#features)
+2. [Requirements](#requirements)
+3. [Setup](#setup)
+4. [Backend Services](#backend-services)
+5. [Frontend Application](#frontend-application)
+6. [API Endpoints](#api-endpoints)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- User authentication
+- Add tasks
+- Edit tasks
+- Delete tasks
+- List tasks
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Requirements
 
-### `npm test`
+- Node.js (>= 12.x)
+- npm (>= 6.x)
+- MongoDB
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup
 
-### `npm run build`
+### Backend Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Navigate to the project directory:
+    ```bash
+    cd backend
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install the necessary dependencies:
+    ```bash
+    npm install
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Create a `.env` file and add the required environment variables:
+    ```
+    PORT=5000
+    MONGO_URI=mongodb://localhost:27017/todoapp
+    JWT_SECRET=your_secret_key
+    ```
 
-### `npm run eject`
+4. Start the backend server:
+    ```bash
+    npm start
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Frontend Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Navigate to the project directory:
+    ```bash
+    cd frontend
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install the necessary dependencies:
+    ```bash
+    npm install
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Start the frontend application:
+    ```bash
+    npm start
+    ```
 
-## Learn More
+## Backend Services
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### User Authentication
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Register**
+  - URL: `/api/auth/register`
+  - Method: `POST`
+  - Body: `{ "username": "your_username", "password": "yourpassword" }`
+  - Description: Creates a new user.
 
-### Code Splitting
+- **Login**
+  - URL: `/api/auth/login`
+  - Method: `POST`
+  - Body: `{ "username": "your_username", "password": "yourpassword" }`
+  - Description: Logs in a user and returns a token.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Todo Operations
 
-### Analyzing the Bundle Size
+- **Get User's Todos**
+  - URL: `/api/todos/user/todos`
+  - Method: `GET`
+  - Headers: `{ "Authorization": "Bearer <token>" }`
+  - Description: Retrieves the todos of the logged-in user.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **Add Todo**
+  - URL: `/api/todos`
+  - Method: `POST`
+  - Headers: `{ "Authorization": "Bearer <token>" }`
+  - Body: `{ "title": "New Todo", "description": "Todo description", "tags": "tag1,tag2" }`
+  - Description: Adds a new todo.
 
-### Making a Progressive Web App
+- **Edit Todo**
+  - URL: `/api/todos/:id`
+  - Method: `PUT`
+  - Headers: `{ "Authorization": "Bearer <token>" }`
+  - Body: `{ "title": "Updated Title", "description": "Updated description", "tags": "updatedTag1,updatedTag2" }`
+  - Description: Edits an existing todo.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Delete Todo**
+  - URL: `/api/todos/:id`
+  - Method: `DELETE`
+  - Headers: `{ "Authorization": "Bearer <token>" }`
+  - Description: Deletes a specified todo.
 
-### Advanced Configuration
+## Frontend Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### User Login and Registration
 
-### Deployment
+1. Register and login from the user interface using only `username` and `password`.
+2. After logging in, the received token is used to make requests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Task Management
 
-### `npm run build` fails to minify
+1. Click the `Add Todo` button to add a new task.
+2. Edit tasks using the `Edit` button next to each task in the list.
+3. Delete tasks using the `Delete` button next to each task, with a confirmation modal for deletion.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Workspace
+
+- **Listing and Adding:** Tasks are listed after the user logs in. Use the `Add Todo` button to add new tasks.
+- **Editing:** Use the `Edit` button next to each task to enter edit mode.
+- **Deleting:** Use the `Delete` button next to each task to delete the task, with a confirmation modal.
+
+## API Endpoints
+
+### Auth
+
+- **POST** `/api/auth/register`
+- **POST** `/api/auth/login`
+
+### Todos
+
+- **GET** `/api/todos/user/todos`
+- **POST** `/api/todos`
+- **PUT** `/api/todos/:id`
+- **DELETE** `/api/todos/:id`
+
+If you encounter any issues or have any contributions, please feel free to contact us. Enjoy using the application!
