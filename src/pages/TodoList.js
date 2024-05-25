@@ -1,5 +1,3 @@
-// src/pages/TodoList.js
-
 import React, { useState, useEffect } from 'react';
 import { List, Avatar, message } from 'antd';
 import axios from 'axios';

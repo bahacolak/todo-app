@@ -1,5 +1,3 @@
-// backend/models/Todo.js
-
 const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema({
