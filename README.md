@@ -96,15 +96,15 @@ This project is a Todo application that allows users to manage their personal ta
   - URL: `/api/todos`
   - Method: `POST`
   - Headers: `{ "Authorization": "Bearer <token>" }`
-  - Body: `{ "title": "New Todo", "description": "Todo description", "tags": "tag1,tag2" }`
-  - Description: Adds a new todo.
+  - Body: FormData with `title`, `description`, `tags`, and `image`
+  - Description: Adds a new todo. Supports optional tags and image upload.
 
 - **Edit Todo**
   - URL: `/api/todos/:id`
   - Method: `PUT`
   - Headers: `{ "Authorization": "Bearer <token>" }`
-  - Body: `{ "title": "Updated Title", "description": "Updated description", "tags": "updatedTag1,updatedTag2" }`
-  - Description: Edits an existing todo.
+  - Body: FormData with `title`, `description`, `tags`, and `image`
+  - Description: Edits an existing todo. Supports optional tags and image update.
 
 - **Delete Todo**
   - URL: `/api/todos/:id`
@@ -121,9 +121,18 @@ This project is a Todo application that allows users to manage their personal ta
 
 ### Task Management
 
-1. Click the `Add Todo` button to add a new task.
-2. Edit tasks using the `Edit` button next to each task in the list.
-3. Delete tasks using the `Delete` button next to each task, with a confirmation modal for deletion.
+1. **Listing and Adding:**
+   - Tasks are listed after the user logs in. Use the `Add Todo` button to add new tasks.
+   - New tasks can include a title, description, optional tags (comma-separated), and an optional image.
+
+2. **Editing:**
+   - Use the `Edit` button next to each task to enter edit mode.
+   - Update the task details including title, description, tags, and image.
+   - Click the `Save` button to save changes.
+
+3. **Deleting:**
+   - Use the `Delete` button next to each task to delete the task.
+   - A confirmation modal will appear to confirm the deletion.
 
 ### Workspace
 
