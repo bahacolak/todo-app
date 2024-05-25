@@ -75,3 +75,12 @@ exports.deleteTodo = async (req, res) => {
     res.status(400).send('Error deleting todo');
   }
 };
+
+exports.fetchTodos = async (req, res) => {
+  try {
+    const todos = await Todo.find({ userId: req.userId });
+    res.json(todos);
+  } catch (error) {
+    res.status(500).send('Error fetching user todos.');
+  }
+};

@@ -3,6 +3,7 @@ const {
   createTodo,
   editTodo,
   deleteTodo,
+  fetchTodos,
 } = require('../controllers/todoController');
 const authenticate = require('../middlewares/authenticate');
 const multer = require('multer');
@@ -33,5 +34,6 @@ const upload = multer({ storage, fileFilter });
 router.post('/', authenticate, upload.single('image'), createTodo);
 router.put('/:id', authenticate, upload.single('image'), editTodo);
 router.delete('/:id', authenticate, deleteTodo);
+router.get('/user', authenticate, fetchTodos);
 
 module.exports = router;
